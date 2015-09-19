@@ -1,5 +1,7 @@
 FROM bradrydzewski/python:2.7
 MAINTAINER Observable Networks <engineering@obsrvbl.com>
+USER ubuntu
+WORKDIR /home/ubuntu
 
 RUN sudo apt-get update && sudo apt-get install -y \
     nodejs
