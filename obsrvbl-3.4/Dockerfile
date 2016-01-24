@@ -1,0 +1,24 @@
+FROM python:3.4
+MAINTAINER Observable Networks <engineering@obsrvbl.com>
+
+RUN apt-get update && apt-get install -y \
+    nodejs \
+    rubygems \
+    byacc \
+    gfortran \
+    libblas-dev \
+    liblapack-dev \
+    libffi-dev \
+    libssl-dev \
+    wamerican \
+    tshark \
+    postgresql-client
+
+RUN curl -O https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
+RUN tar xf phantomjs-2.0.0-ubuntu-12.04.tar.bz2
+RUN cp phantomjs /usr/local/bin/phantomjs
+RUN pip install -U 'pip>=1.5.6' 'setuptools>=18.6.1'
+
+RUN gem install ghi
+
+ENTRYPOINT ["/bin/bash"]
