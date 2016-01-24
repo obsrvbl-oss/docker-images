@@ -22,7 +22,7 @@ RUN curl -O https://s3.amazonaws.com/onstatic/site-packages/nfdump-1.6.14-x86_64
 RUN mv nfdump-1.6.14-x86_64 /usr/bin/nfdump
 RUN chmod +x /usr/bin/nfdump
 
-RUN pip install -U 'pip>=1.5.6' 'setuptools>=18.6.1'
+RUN pip install -U 'pip>=6.0' 'setuptools>=18.6.1'
 
 RUN gem install ghi
 
