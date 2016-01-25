@@ -13,7 +13,10 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     wamerican \
     tshark \
+    netcat \
     postgresql-client
+
+RUN mkdir /root/.wireshark/ && chmod a+rx /root/.wireshark/
 
 RUN curl -O https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
 RUN tar xf phantomjs-2.0.0-ubuntu-12.04.tar.bz2
