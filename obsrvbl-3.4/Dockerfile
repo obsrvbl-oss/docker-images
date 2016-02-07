@@ -4,6 +4,7 @@ MAINTAINER Observable Networks <engineering@obsrvbl.com>
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     nodejs \
+    npm \
     rubygems \
     byacc \
     gfortran \
