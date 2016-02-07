@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     postgresql-client
 
 RUN ln -s /usr/bin/nodejs /usr/local/bin/node
+RUN echo '{ "allow_root": true }' > /root/.bowerrc
 
 RUN mkdir /root/.wireshark/ && chmod a+rx /root/.wireshark/
 
