@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     nodejs \
     npm \
+    ruby-dev \
     rubygems \
     byacc \
     gfortran \
@@ -22,9 +23,9 @@ RUN echo '{ "allow_root": true }' > /root/.bowerrc
 
 RUN mkdir /root/.wireshark/ && chmod a+rx /root/.wireshark/
 
-RUN curl -O https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
-RUN tar xf phantomjs-2.0.0-ubuntu-12.04.tar.bz2
-RUN cp phantomjs /usr/local/bin/phantomjs
+RUN curl -O https://s3.amazonaws.com/onstatic/phantomjs-2.1.1-linux-x86_64.tar.bz2
+RUN tar xf phantomjs-2.1.1-linux-x86_64.tar.bz2
+RUN cp phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs
 
 RUN curl -O https://s3.amazonaws.com/onstatic/site-packages/nfdump-1.6.14-x86_64
 RUN mv nfdump-1.6.14-x86_64 /usr/bin/nfdump
