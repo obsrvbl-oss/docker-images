@@ -3,6 +3,7 @@
 # 1. https://github.com/docker-library/elasticsearch/blob/master/2.3/docker-entrypoint.sh
 # 2. http://blog.dmcquay.com/devops/2015/09/12/running-elasticsearch-on-aws-ecs.html
 
+set -x
 set -e
 
 # Add elasticsearch as command if needed
