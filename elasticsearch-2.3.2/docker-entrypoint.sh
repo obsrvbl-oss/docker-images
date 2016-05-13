@@ -3,8 +3,7 @@
 # 1. https://github.com/docker-library/elasticsearch/blob/master/2.3/docker-entrypoint.sh
 # 2. http://blog.dmcquay.com/devops/2015/09/12/running-elasticsearch-on-aws-ecs.html
 
-set -x
-set -e
+set -ex
 
 # Add elasticsearch as command if needed
 if [ "${1:0:1}" = '-' ]; then
@@ -22,7 +21,7 @@ if [ "$1" = 'elasticsearch' -a "$(id -u)" = '0' ]; then
 fi
 
 # ECS will report the docker interface without help, so we override that with host's private ip
-AWS_PRIVATE_IP=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
+AWS_PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
 set -- "$@" --network.publish_host=$AWS_PRIVATE_IP
 
 # As argument is not related to elasticsearch,
