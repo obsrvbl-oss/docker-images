@@ -34,7 +34,7 @@ RUN yum install -y autoconf \
 RUN curl -O https://bootstrap.pypa.io/get-pip.py
 RUN python get-pip.py
 
-RUN gem install fpm -v 1.4.0
+RUN gem install fpm
 
 RUN git clone https://github.com/OISF/libhtp.git
 WORKDIR /libhtp
