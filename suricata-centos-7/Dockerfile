@@ -9,6 +9,7 @@ RUN yum install -y autoconf \
     gcc \
     gcc-c++ \
     git \
+    jansson-devel \
     libcap-ng \
     libcap-ng-devel \
     libnet \
