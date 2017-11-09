@@ -27,6 +27,7 @@ RUN rc-update add sshd
 # Retrieve Python and Ruby packages
 RUN curl -O https://bootstrap.pypa.io/get-pip.py
 RUN python get-pip.py
+RUN pip install awscli
 RUN gem install fpm
 
 # Retrieve libpcap and the cross compilers
