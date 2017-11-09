@@ -1,8 +1,7 @@
-FROM alpine:3.2
+FROM alpine:3.6
 MAINTAINER Observable Networks <engineering@obsrvbl.com>
 
 # Retrieve Alpine packages
-RUN echo 'http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
 RUN apk update && apk add \
     bash \
     bison \
@@ -17,16 +16,17 @@ RUN apk update && apk add \
     python \
     ruby \
     ruby-dev \
+    ruby-irb \
+    ruby-rdoc \
     rpm \
     tar \
     tzdata \
     xz
 
-RUN rc-update add sshd
-
 # Retrieve Python and Ruby packages
 RUN curl -O https://bootstrap.pypa.io/get-pip.py
 RUN python get-pip.py
+RUN pip install awscli
 RUN gem install fpm
 
 # Retrieve libpcap and the cross compilers
