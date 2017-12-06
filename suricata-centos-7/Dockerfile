@@ -22,6 +22,7 @@ RUN yum install -y autoconf \
     make \
     pcre \
     pcre-devel \
+    python-pip \
     rpm-build \
     ruby \
     ruby-devel \
@@ -31,8 +32,7 @@ RUN yum install -y autoconf \
     zlib \
     zlib-devel
 
-RUN curl -O https://bootstrap.pypa.io/get-pip.py
-RUN python get-pip.py
+RUN pip install awscli
 
 RUN gem install fpm
 
