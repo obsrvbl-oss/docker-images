@@ -22,14 +22,15 @@ RUN apt-get update && apt-get install -y \
     make \
     pkg-config \
     python2.7 \
+    python-dev \
+    python-pip \
     rpm \
     ruby \
     ruby-dev \
     zlib1g \
     zlib1g-dev
 
-RUN curl -O https://bootstrap.pypa.io/get-pip.py
-RUN python2.7 get-pip.py
+RUN pip install awscli
 
 RUN gem install fpm
 
