@@ -22,6 +22,7 @@ RUN yum install -y autoconf \
     make \
     pcre \
     pcre-devel \
+    python-devel \
     python-pip \
     rpm-build \
     ruby \

@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
     make \
     pkg-config \
     python2.7 \
+    python-dev \
     python-pip \
     rpm \
     ruby \
