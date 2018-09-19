@@ -1,5 +1,5 @@
 FROM alpine:3.6
-MAINTAINER Observable Networks <engineering@obsrvbl.com>
+LABEL maintainer="Observable Networks <engineering@obsrvbl.com>"
 
 # Retrieve Alpine packages
 RUN apk update && apk add \

@@ -1,5 +1,5 @@
 FROM ubuntu:trusty
-MAINTAINER Observable Networks <engineering@obsrvbl.com>
+LABEL maintainer="Observable Networks <engineering@obsrvbl.com>"
 
 RUN apt-get update && apt-get install -y \
     autoconf \
