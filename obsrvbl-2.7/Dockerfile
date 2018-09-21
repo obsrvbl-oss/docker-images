@@ -1,5 +1,5 @@
 FROM python:2.7
-MAINTAINER Observable Networks <engineering@obsrvbl.com>
+LABEL maintainer="Observable Networks <engineering@obsrvbl.com>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \

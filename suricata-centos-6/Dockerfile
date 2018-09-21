@@ -1,5 +1,5 @@
 FROM centos:6
-MAINTAINER Observable Networks <engineering@obsrvbl.com>
+LABEL maintainer="Observable Networks <engineering@obsrvbl.com>"
 
 RUN yum install -y epel-release
 
