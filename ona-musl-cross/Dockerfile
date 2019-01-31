@@ -14,6 +14,7 @@ RUN apk update && apk add \
     openssh \
     perl \
     python \
+    python3 \
     ruby \
     ruby-dev \
     ruby-irb \
