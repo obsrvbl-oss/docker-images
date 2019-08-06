@@ -27,7 +27,7 @@ RUN apk update && apk add \
 RUN curl -O https://bootstrap.pypa.io/get-pip.py
 RUN python get-pip.py
 RUN pip install awscli
-RUN gem install fpm
+RUN gem install etc fpm
 
 # Retrieve libpcap and the cross compilers
 RUN curl -O https://www.tcpdump.org/release/libpcap-1.9.0.tar.gz
