@@ -1,4 +1,4 @@
-FROM alpine:3.6
+FROM alpine:3.9
 LABEL maintainer="Observable Networks <engineering@obsrvbl.com>"
 
 # Retrieve Alpine packages
@@ -30,36 +30,47 @@ RUN pip install awscli
 RUN gem install fpm
 
 # Retrieve libpcap and the cross compilers
-RUN curl -O http://www.tcpdump.org/release/libpcap-1.7.4.tar.gz
-RUN curl -O https://s3.amazonaws.com/onstatic/musl-cross/crossx86-arm-linux-musleabihf-1.1.tar.xz
-RUN curl -O https://s3.amazonaws.com/onstatic/musl-cross/crossx86-i386-linux-musl-1.1.tar.xz
-RUN curl -O https://s3.amazonaws.com/onstatic/musl-cross/crossx86-x86_64-linux-musl-1.1.tar.xz
+RUN curl -O https://www.tcpdump.org/release/libpcap-1.9.0.tar.gz
+RUN curl -O http://musl.cc/x86_64-linux-musl-cross.tgz
+RUN curl -O https://musl.cc/arm-linux-musleabihf-cross.tgz
+RUN curl -O https://musl.cc/aarch64-linux-musl-cross.tgz
 
-RUN tar xf libpcap-1.7.4.tar.gz
-RUN tar xf crossx86-arm-linux-musleabihf-1.1.tar.xz
-RUN tar xf crossx86-i386-linux-musl-1.1.tar.xz
-RUN tar xf crossx86-x86_64-linux-musl-1.1.tar.xz
+RUN tar xf libpcap-1.9.0.tar.gz
+RUN tar xf x86_64-linux-musl-cross.tgz
+RUN tar xf arm-linux-musleabihf-cross.tgz
+RUN tar xf aarch64-linux-musl-cross.tgz
 
 # Build libpcap each platform
-WORKDIR /libpcap-1.7.4
+WORKDIR /libpcap-1.9.0
 
-RUN CC="/arm-linux-musleabihf/bin/arm-linux-musleabihf-gcc" ./configure \
+RUN CC="/x86_64-linux-musl-cross/bin/x86_64-linux-musl-gcc" ./configure \
     --with-pcap="linux" \
-    --host="arm-linux" \
-    --prefix="/arm-linux-musleabihf"
-RUN make && make install && make distclean
-
-RUN CC="/i386-linux-musl/bin/i386-linux-musl-gcc" ./configure \
-    --with-pcap="linux" \
-    --host="i386-linux" \
-    --prefix="/i386-linux-musl"
-RUN make && make install && make distclean
-
-RUN CC="/x86_64-linux-musl/bin/x86_64-linux-musl-gcc" ./configure \
-    --with-pcap="linux" \
+    --enable-usb="no" \
+    --enable-netmap="no" \
+    --enable-dbus="no" \
+    --enable-rdma="no" \
     --host="x86_64-linux" \
-    --prefix="/x86_64-linux-musl"
+    --prefix="/x86_64-linux-musl-cross"
 RUN make && make install && make distclean
 
+RUN CC="/arm-linux-musleabihf-cross/bin/arm-linux-musleabihf-gcc" ./configure \
+    --with-pcap="linux" \
+    --enable-usb="no" \
+    --enable-netmap="no" \
+    --enable-dbus="no" \
+    --enable-rdma="no" \
+    --host="x86_64-linux" \
+    --prefix="/arm-linux-musleabihf-cross"
+RUN make && make install && make distclean
+
+RUN CC="/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc" ./configure \
+    --with-pcap="linux" \
+    --enable-usb="no" \
+    --enable-netmap="no" \
+    --enable-dbus="no" \
+    --enable-rdma="no" \
+    --host="x86_64-linux" \
+    --prefix="/aarch64-linux-musl-cross"
+RUN make && make install && make distclean
 
 ENTRYPOINT ["/bin/ash"]
