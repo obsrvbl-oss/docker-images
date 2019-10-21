@@ -5,6 +5,7 @@ RUN yum install -y epel-release
 
 RUN yum install -y autoconf \
     automake \
+    cargo \
     file-devel \
     gcc \
     gcc-c++ \
@@ -28,6 +29,7 @@ RUN yum install -y autoconf \
     ruby \
     ruby-devel \
     rubygems \
+    rustc \
     which \
     tar \
     zlib \

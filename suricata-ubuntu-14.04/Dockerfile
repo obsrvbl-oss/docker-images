@@ -1,10 +1,11 @@
-FROM ubuntu:trusty
+FROM ubuntu:16.04
 LABEL maintainer="Observable Networks <engineering@obsrvbl.com>"
 
 RUN apt-get update && apt-get install -y \
     autoconf \
     automake \
     build-essential \
+    cargo \
     curl \
     git \
     libcap-ng0 \
@@ -27,6 +28,7 @@ RUN apt-get update && apt-get install -y \
     rpm \
     ruby \
     ruby-dev \
+    rustc \
     zlib1g \
     zlib1g-dev
 
@@ -36,7 +38,6 @@ RUN gem install fpm
 
 RUN git clone https://github.com/OISF/libhtp.git
 WORKDIR /libhtp
-RUN git checkout 0.5.17
 RUN ./autogen.sh && ./configure && make && make install
 
 WORKDIR /
