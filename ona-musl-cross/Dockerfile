@@ -30,18 +30,18 @@ RUN pip install awscli
 RUN gem install etc fpm
 
 # Retrieve libpcap and the cross compilers
-RUN curl -O https://www.tcpdump.org/release/libpcap-1.9.0.tar.gz
+RUN curl -O https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz
 RUN curl -O http://musl.cc/x86_64-linux-musl-cross.tgz
 RUN curl -O https://musl.cc/arm-linux-musleabihf-cross.tgz
 RUN curl -O https://musl.cc/aarch64-linux-musl-cross.tgz
 
-RUN tar xf libpcap-1.9.0.tar.gz
+RUN tar xf libpcap-1.9.1.tar.gz
 RUN tar xf x86_64-linux-musl-cross.tgz
 RUN tar xf arm-linux-musleabihf-cross.tgz
 RUN tar xf aarch64-linux-musl-cross.tgz
 
 # Build libpcap each platform
-WORKDIR /libpcap-1.9.0
+WORKDIR /libpcap-1.9.1
 
 RUN CC="/x86_64-linux-musl-cross/bin/x86_64-linux-musl-gcc" ./configure \
     --with-pcap="linux" \
