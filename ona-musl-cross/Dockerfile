@@ -1,8 +1,9 @@
-FROM alpine:3.10
+FROM alpine:3.12
 LABEL maintainer="Observable Networks <engineering@obsrvbl.com>"
 
 # Retrieve Alpine packages
 RUN apk update && apk add \
+    aws-cli \
     bash \
     bison \
     build-base \
@@ -13,7 +14,8 @@ RUN apk update && apk add \
     net-snmp-tools \
     openssh \
     perl \
-    python \
+    python2 \
+    python3 \
     ruby \
     ruby-dev \
     ruby-irb \
@@ -23,10 +25,7 @@ RUN apk update && apk add \
     tzdata \
     xz
 
-# Retrieve Python and Ruby packages
-RUN curl -O https://bootstrap.pypa.io/get-pip.py
-RUN python get-pip.py
-RUN pip install awscli
+# Retrieve Ruby packages
 RUN gem install etc fpm
 
 # Retrieve libpcap and the cross compilers
@@ -72,5 +71,9 @@ RUN CC="/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc" ./configure \
     --host="x86_64-linux" \
     --prefix="/aarch64-linux-musl-cross"
 RUN make && make install && make distclean
+
+# Retrieve Python packages
+RUN curl -O https://bootstrap.pypa.io/get-pip.py
+RUN python3 get-pip.py
 
 ENTRYPOINT ["/bin/ash"]
